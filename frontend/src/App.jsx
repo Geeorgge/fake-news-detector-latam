@@ -1,27 +1,20 @@
-import { useState } from 'react'
+import "./App.css";
+import { useState } from "react";
+import viteLogo from "/vite.svg";
+import Home from "./pages/Home";
+import MainLayout from "./layout/MainLayout";
+import About from "./pages/About";
 
 function App() {
-  const [text, setText] = useState("")
-  const [result, setResult] = useState(null)
-
-  const handleCheck = async () => {
-    const res = await fetch("http://localhost:8000/predict", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text })
-    });
-    const data = await res.json();
-    setResult(data);
-  };
+  const [count, setCount] = useState(0);
 
   return (
-    <div>
-      <h1>Fake News Detector LATAM</h1>
-      <textarea value={text} onChange={e => setText(e.target.value)} />
-      <button onClick={handleCheck}>Analizar</button>
-      {result && <pre>{JSON.stringify(result, null, 2)}</pre>}
-    </div>
-  )
+    
+    <MainLayout>
+      <Home />
+      {/* <About /> */}
+    </MainLayout>
+  );
 }
 
-export default App
+export default App;
