@@ -1,6 +1,17 @@
-version: '3.9'
 
 services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - HOST=0.0.0.0
+    restart: always
+
   backend:
     build:
       context: ./backend
@@ -10,9 +21,8 @@ services:
       - ./backend:/app
     restart: always
 
-  frontend:
-    build:
-      context: ./frontend
+  mongo:
+    image: mongo:6
     ports:
-      - "3000:3000"
+      - "27017:27017"
     restart: always
