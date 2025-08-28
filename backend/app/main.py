@@ -1,9 +1,16 @@
 from fastapi import FastAPI
-from app.api import router as api_router
+from fastapi.middleware.cors import CORSMiddleware
+from app.api import router as api_router 
 
-app = FastAPI(
-    title="Fake News Detector LATAM",
-    version="0.1.0",
+app = FastAPI()
+
+# CORS settings
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"], # Adjust as needed
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(api_router)
